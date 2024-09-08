@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "app"
+name = "src"
 version = "0.1.0"
 description = ""
 authors = ["Andrés Ponce <75549856+aPonce2001@users.noreply.github.com>"]
