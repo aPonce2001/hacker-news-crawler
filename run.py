@@ -9,7 +9,7 @@ def install_front_end_dependencies():
 
 def install_back_end_dependencies():
     print("\033[95m🔧 Installing back-end dependencies...\033[0m")
-    subprocess_run("poetry install", shell=True, check=True, cwd="back-end")
+    subprocess_run("poetry install --without dev", shell=True, check=True, cwd="back-end")
     print("\033[92m✅ Back-end dependencies installed!\n\n\033[0m")
 
 
