@@ -32,7 +32,7 @@ def get_hackers_news(
             reverse=True
         ).execute_filter()
 
-    elif filter_request == HackersNewsFilterRequest.TITLE_WORDS_LESS_OR_EQUAL_THAN_FIVE_ORDER_BY_POINTS_DESC:
+    elif filter_request == HackersNewsFilterRequest.TITLE_WORDS_LESS_THAN_OR_EQUALS_TO_FIVE_ORDER_BY_POINTS_DESC:
         entries = filtering_builder.where(
             lambda entry: count_title_words(entry.title) <= 5
         ).order_by(

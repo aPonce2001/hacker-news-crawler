@@ -1,4 +1,13 @@
-.entries {
-    width: min(1100px, 100%);
-    margin: 0 auto;
+.container {
+	width: min(1100px, 100%);
+	margin: 0 auto;
+}
+
+.filters {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1rem;
 }
