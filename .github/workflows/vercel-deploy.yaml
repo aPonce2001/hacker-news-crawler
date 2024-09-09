@@ -1,0 +1,58 @@
+name: Deploy to vercel
+on:
+  workflow_run:
+    workflows: ["Python Tests", "JavaScript Tests Tests"]
+    types:
+      - completed
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: ./back-end
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install --no-root --with dev
+
+      - name: Generate requirements.txt
+        working-directory: ./back-end
+        run: poetry export --without-hashes > ../requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        working-directory: ./front-end
+        run: |
+          npm install
+
+      - name: Build front-end
+        working-directory: ./front-end
+        run: npm run build -- --base=/app
+
+      - name: Move back-end code to root
+        run: |
+          cp -r ./back-end/* ./
+
+      - name: Update static file path in setup.py
+        run: |
+          sed -i 's|\.\./front-end/dist|\.\/front-end/dist|g' ./src/api/setup.py
+
+      - uses: amondnet/vercel-action@v25.2.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: "--prod"
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
