@@ -43,49 +43,6 @@ Replace `{PORT}` with the desired port number. The script will start both the Fa
 🌐 Server running at http://localhost:8000/app
 🟢 Server started. Press Ctrl+C to exit.
 ```
-
-Here's a reorganized version of the `README.md` based on the inclusion of the automatic execution option:
-
-# Hacker News Web Crawler
-
-This repository contains a web crawler built to extract entries from Hacker News, providing filtering and sorting capabilities through a REST API. The front-end displays the filtered news data using a React user interface.
-
-## Features
-
-- **Crawler**: Extracts the latest news posts from Hacker News.
-- **API**: Exposes the data with filtering and sorting capabilities.
-- **Front-End**: React-based user interface for exploring news data.
-- **Automated Tests**: Backend tests with `pytest`, front-end tests with `jest`.
-- **GitHub Actions**: Continuous integration setup for running automated tests.
-
-## Getting Started
-
-### Prerequisites
-
-- [Node.js LTS](https://nodejs.org/en)
-- [Python (v3.12+)](https://www.python.org/downloads/)
-- [Poetry (for Python dependency management)](https://python-poetry.org/docs/main/#installation)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/aPonce2001/hacker-news-crawler.git
-   cd hacker-news-crawler
-   ```
-
-### Running the Project
-
-#### Automatic Execution (Recommended)
-
-For ease of use, you can execute both the back-end and front-end services automatically using the provided script. This option handles everything for you, including the port setup:
-
-```bash
-python run.py --port {PORT}
-```
-
-Replace `{PORT}` with the desired port number. The script will start both the FastAPI server and the React front-end, making the project accessible from a single entry point.
-
 #### Manual Execution
 
 If you'd prefer to run the services manually, follow these steps:
@@ -104,7 +61,7 @@ If you'd prefer to run the services manually, follow these steps:
 
 3. Build the React app:
    ```bash
-   npm run build
+   npm run build -- --base=/app
    ```
 
 4. The application will be built in the `dist` folder.
@@ -143,7 +100,7 @@ If you'd prefer to run the services manually, follow these steps:
 1. Run the front-end tests with `jest`:
    ```bash
    cd front-end
-   npm run test
+   npm test
    ```
 
 ### GitHub Actions
